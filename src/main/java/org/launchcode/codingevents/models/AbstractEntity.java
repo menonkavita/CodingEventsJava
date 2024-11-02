@@ -7,7 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 
 import java.util.Objects;
 
-@MappedSuperclass
+@MappedSuperclass       // fields sh be mapped to tables in child class
 public abstract class AbstractEntity {
 
     @Id
