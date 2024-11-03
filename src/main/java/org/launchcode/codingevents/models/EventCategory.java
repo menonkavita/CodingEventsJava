@@ -10,8 +10,10 @@ import java.util.List;
 /**
  * Created by Chris Bay
  */
-@Entity
+@Entity                 // A class that you want to store in the database as a table
 public class EventCategory extends AbstractEntity {
+    // AbstractEntity is the base class for persistent class Event.
+    // AbstractEntity contains the logic related to IDs which are our PKs, so need to extend AbstractEntity
 
     @Size(min=3, message="Name must be at least 3 characters long")
     private String name;
