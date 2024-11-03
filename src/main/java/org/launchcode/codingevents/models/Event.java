@@ -1,8 +1,10 @@
 package org.launchcode.codingevents.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 /**
@@ -22,13 +24,16 @@ public class Event extends AbstractEntity  {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    private EventType type;
+//    private EventType type;            // Replaced eventType Enum (constant) with EventCategory for dynamic addition & deletion of categories
+    @ManyToOne                           // Persistence Annotation
+    @NotNull(message = "Category is required")
+    private EventCategory eventCat;
 
-    public Event(String name, String description, String contactEmail, EventType type) {
+    public Event(String name, String description, String contactEmail, EventCategory eCat) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.type = type;
+        this.eventCat = eCat;
     }
 
     public Event() {}
@@ -57,12 +62,12 @@ public class Event extends AbstractEntity  {
         this.contactEmail = contactEmail;
     }
 
-    public EventType getType() {
-        return type;
+    public EventCategory getEventCat() {
+        return eventCat;
     }
 
-    public void setType(EventType type) {
-        this.type = type;
+    public void setEventCat(EventCategory eventCat) {
+        this.eventCat = eventCat;
     }
 
     @Override

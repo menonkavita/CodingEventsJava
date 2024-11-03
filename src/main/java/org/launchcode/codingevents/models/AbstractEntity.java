@@ -1,6 +1,7 @@
 package org.launchcode.codingevents.models;
 
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 public abstract class AbstractEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Add this @GeneratedValue(strategy = ...) parameter to create unique tables else table_seq will be auto-generated along with actual table.
     private int id;
 
     public int getId() {
