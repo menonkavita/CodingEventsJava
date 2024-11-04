@@ -6,10 +6,7 @@ import org.launchcode.codingevents.models.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 /**
@@ -47,6 +44,25 @@ public class TagController {
         }
 
         tagRepository.save(tag);
+        return "redirect:/tags";
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteTag(Model m){
+        m.addAttribute("title", "Delete Tag");
+        m.addAttribute("tags",tagRepository.findAll());
+        return "tags/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteTag(@RequestParam(required = false) int[] tagIds){
+
+        if(tagIds != null){
+            for(int id : tagIds){
+                tagRepository.deleteById(id);
+            }
+        }
+
         return "redirect:/tags";
     }
 }
