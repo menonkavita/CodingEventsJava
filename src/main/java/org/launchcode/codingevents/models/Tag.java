@@ -1,8 +1,12 @@
 package org.launchcode.codingevents.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chris Bay
@@ -13,6 +17,9 @@ public class Tag extends AbstractEntity {
     @Size(min = 1, max = 25)
     @NotBlank
     private String name;
+
+    @ManyToMany(mappedBy = "tags")      // mapped by 'tags' field in Event.java
+    private final List<Event> events = new ArrayList<>();   // --------- mapped by: tags field(object) in Event table--------------
 
     public Tag(String name) {
         this.name = name;

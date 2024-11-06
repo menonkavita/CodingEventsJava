@@ -16,7 +16,7 @@ public class EventCategory extends AbstractEntity {
     @Size(min=3, message="Name must be at least 3 characters long")
     private String name;
 
-    @OneToMany(mappedBy = "eventCategory")
+    @OneToMany(mappedBy = "eventCategory")              // --------- mapped by: eventCategory field(object) in Event table--------------
     private final List<Event> events = new ArrayList<>();
 
     public EventCategory(@Size(min = 3, message = "Name must be at least 3 characters long") String name) {
